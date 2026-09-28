@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geleceğin Meslekleri ve Trend Skorları - Kariyer Asistani</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="test-body">
+
+    <!-- Header -->
+    <header class="test-header">
+        <div class="header-content">
+            <span class="badge-pill" style="background: #EEF2FF; color: #4F46E5;">📈 Modül 01</span>
+            <h1>Geleceğin Meslekleri ve Trend Skorlama</h1>
+        </div>
+        <a href="/" class="back-link">← Ana Sayfa</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="test-container" style="max-width: 60rem;">
+        <div class="test-hero">
+            <h2>Yapay Zekâ ve Otomasyon Çağında Yükselen Trendler</h2>
+            <p>Oracle veritabanımızdan çekilen, geleceğin en çok talep gören ve yüksek trend skoruna sahip meslek analizleri.</p>
+        </div>
+
+        <!-- Meslekler Listesi / Tablosu -->
+        <div class="quiz-card" style="padding: 1.5rem;">
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #E2E8F0; color: #64748B; font-size: 0.85rem; text-transform: uppercase;">
+                            <th style="padding: 1rem;">Meslek / Bölüm Adı</th>
+                            <th style="padding: 1rem;">Tür</th>
+                            <th style="padding: 1rem;">Maaş Potansiyeli</th>
+                            <th style="padding: 1rem; text-align: right;">Gelecek Trend Skoru</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for meslek in meslekler %}
+                        <tr style="border-bottom: 1px solid #F1F5F9; transition: background 0.2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='transparent'">
+                            <td style="padding: 1rem; font-weight: 700; color: #1E293B;">{{ meslek[0] }}</td>
+                            <td style="padding: 1rem;">
+                                <span style="background: #F0FDF4; color: #16A34A; padding: 0.25rem 0.6rem; border-radius: 0.35rem; font-size: 0.8rem; font-weight: 600;">{{ meslek[1] }}</span>
+                            </td>
+                            <td style="padding: 1rem; color: #475569; font-weight: 500;">{{ meslek[3] }}</td>
+                            <td style="padding: 1rem; text-align: right;">
+                                <span style="background: #EEF2FF; color: #4F46E5; padding: 0.35rem 0.75rem; border-radius: 2rem; font-weight: 700; font-size: 0.9rem;">⭐ {{ meslek[2] }} / 10</span>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" style="padding: 2rem; text-align: center; color: #94A3B8;">Henüz veritabanında kayıtlı meslek trendi bulunmuyor.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="test-footer">
+        Kariyer ve Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>
+        İlgi ve Yetenek Analiz Testi -Kariyer Asistanı
+    </title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+</head>
+
+<body class="test-body">
+    <!-- HEader -->
+    <header class=" test-header ">
+        <h1 class="header-content ">
+            <span class=" badge-pill"> 🧠 Modül 02 </span> Akıllı İlgi ve Yetenek Testi
+        </h1>
+        <a href=" / " class=" back-link ">← Ana Sayfaya Dön </a>
+
+    </header>
+
+    <!--Main-Content-->
+    <main class="test-container ">
+        <div class=" test-hero">
+            <h2>Kendi Potansiyelini Keşfet</h2>
+            <p>Aşağıdaki durumlara ne kadar katıldığını belirterek sana uygun kariyer ve bölüm eşleşmesini yapmamızı sağlar.</p>
+        </div>
+
+        <!--Test Formu -->
+        <form action=" /test " method=" POST " class=" quiz-form ">
+            <!--Soru 1 -->
+            <h3>1.Karmaşık problemleri çözmek,verileri analiz etmek ve mantık yürütmek beni heyecanlandırıyor.</h3>
+            <div class=" quiz-card ">
+                <div class=" option - grid ">
+                    <label class="option-pill">
+                        <input type="radio" name="q1" value="5" required>
+                        <span>Kesinlikle Katılıyorum</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q1" value="4">
+                        <span>Katılıyorum</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q1" value="3">
+                        <span>Kararsızım</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q1" value="2">
+                        <span>Katılmıyorum</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q1" value="1">
+                        <span>Kesinlikle Katılmıyorum</span>
+                    </label>
+                </div>
+            </div>
+            <!--Soru 2-->
+            <div class=" quiz-card ">
+                <h3>İnsanlarla iletişim kurmak,yeni fikirler anlatmak ve sosyal projelerde yer almak bana enerji verir.</h3>
+                <div class=" option-grid ">
+                    <label class="option-pill">
+                        <input type="radio" name="q2" value="5" required>
+                        <span>Kesinlikle Katılıyorum</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q2" value="4">
+                        <span>Katılıyorum</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q2" value="3">
+                        <span>Kararsızım</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q2" value="2">
+                        <span>Katılmıyorum</span>
+                    </label>
+                    <label class="option-pill">
+                        <input type="radio" name="q2" value="1">
+                        <span>Kesinlikle Katılmıyorum</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Gönder butonu-->
+            <div class=" submit-wrapper ">
+                <button type=" submit " class=" btn-submit ">Sonuçları analiz et📊</button>
+            </div>
+        </form>
+    </main>
+
+    <!--Footer-->
+    <footer class="test-footer">
+        Kariyer Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+    </footer>
+</body>
+
+</html>
