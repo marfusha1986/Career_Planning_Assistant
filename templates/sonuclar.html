@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sonucu ve Kariyer Eşleşmesi - Kariyer Asistani</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .breakdown-box {
+            background: #F1F5F9;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .breakdown-box h4 {
+            font-size: 0.85rem;
+            color: #64748B;
+            margin-bottom: 0.25rem;
+        }
+        
+        .breakdown-box span {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1E293B;
+        }
+    </style>
+</head>
+
+<body class="test-body">
+
+    <!-- Header -->
+    <header class="test-header">
+        <div class="header-content">
+            <span class="badge-pill" style="background: #EEF2FF; color: #4F46E5;">🎯 Modül 03</span>
+            <h1>Kural Tabanlı Kariyer Eşleşmeniz</h1>
+        </div>
+        <a href="/" class="back-link">← Ana Sayfa</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="test-container" style="max-width: 50rem;">
+
+        <div class="quiz-card" style="padding: 2.5rem 2rem; text-align: center;">
+            <div style="font-size: 3.5rem; margin-bottom: 1rem;">🎉</div>
+
+            <h2 style="color: #1E293B; margin-bottom: 0.5rem;">Testi Başarıyla Tamamladın!</h2>
+            <p style="color: #64748B; margin-bottom: 2rem;">İşaretlediğin toplam madde sayısı: <strong style="color: #4F46E5; font-size: 1.2rem;">{{ puan }}</strong></p>
+
+            <!-- Arka Plandan Gelen Kategori Dağılımı (Breakdown) -->
+            <div style="margin-bottom: 2rem; text-align: left;">
+                <h3 style="font-size: 1rem; color: #334155; margin-bottom: 1rem;">📊 Kategori Bazlı İlgi Dağılımın:</h3>
+                <div class="breakdown-grid">
+                    <div class="breakdown-box">
+                        <h4>Sayısal / Teknik</h4>
+                        <span>{{ puanlar.sayisal }} Puan</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <h4>Sözel / Dil</h4>
+                        <span>{{ puanlar.sozel }} Puan</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <h4>Eşit Ağırlık</h4>
+                        <span>{{ puanlar.esit }} Puan</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <h4>Sağlık / Doğa</h4>
+                        <span>{{ puanlar.saglik }} Puan</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <h4>Sanat / Tasarım</h4>
+                        <span>{{ puanlar.sanat }} Puan</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <h4>Sosyal / Hukuk</h4>
+                        <span>{{ puanlar.sosyal }} Puan</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dinamik Eşleşme Kutusu -->
+            <div style="background: #F8FAFC; border: 2px solid #E2E8F0; border-radius: 1rem; padding: 2rem; margin-bottom: 2rem; text-align: left;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.05em;">Sana En Uygun Alan</span>
+                <h3 style="color: #0F172A; font-size: 1.5rem; margin: 0.5rem 0 1rem 0;">{{ alan }}</h3>
+                <p style="color: #475569; line-height: 1.6; margin: 0;">{{ aciklama }}</p>
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+
+                <a href="/gelecek-meslekleri?alan={{ alan }}" style="background: #E2E8F0; color: #1E293B; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">Gelecek Trendlerini İncele</a>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="test-footer">
+        Kariyer ve Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+    </footer>
+
+</body>
+
+</html>

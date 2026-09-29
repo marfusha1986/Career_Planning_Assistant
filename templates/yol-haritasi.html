@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kariyer ve YKS Çalışma Yol Haritası - Kariyer Asistani</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-box {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        
+        .info-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #4F46E5;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .info-value {
+            color: #1E293B;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .strategy-section {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-left: 5px solid #4F46E5;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .strategy-title {
+            color: #1E293B;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .strategy-text {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="test-body">
+
+    <header class="test-header">
+        <div class="header-content">
+            <span class="badge-pill" style="background: #EEF2FF; color: #4F46E5;">🎯 YKS & Kariyer Pusulası</span>
+            <h1>Hedef Meslek Çalışma ve Başarı Yol Haritası</h1>
+        </div>
+        <a href="/rol-simulasyonu?alan={{ alan }}" class="back-link">← Simülasyona Dön</a>
+    </header>
+
+    <main class="test-container" style="max-width: 60rem;">
+
+        <div class="quiz-card" style="padding: 2.5rem 2rem;">
+
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <span style="color: #64748B; font-size: 0.9rem;">Seçtiğin Hedef Meslek:</span>
+                <h2 style="color: #4F46E5; font-size: 2rem; margin: 0.25rem 0;">{{ meslek_adi }}</h2>
+                <p style="color: #334155; font-size: 0.95rem; margin-top: 0.5rem;">
+                    Bu hedefi yakalamak için YKS'de hangi derslere ağırlık vermen gerektiğini, nasıl çalışacağını ve geçmiş yıllardaki kazananların deneyimlerini aşağıda bulabilirsin.
+                </p>
+            </div>
+
+            <!-- Özet Bilgi Kartları (harita değişkeni ile eşleştirildi) -->
+            <div class="info-grid">
+                <div class="info-box">
+                    <span class="info-label">📊 YKS Puan Türü</span>
+                    <p class="info-value">{{ harita.puan_turu }}</p>
+                </div>
+                <div class="info-box">
+                    <span class="info-label">🎯 Hedef Başarı Sıralaması</span>
+                    <p class="info-value">{{ harita.taban_siralamasi }}</p>
+                </div>
+                <div class="info-box">
+                    <span class="info-label">📈 Geçen Sene Taban Puanı</span>
+                    <p class="info-value">{{ harita.son_yil_puan }}</p>
+                </div>
+            </div>
+
+            <!-- Strateji ve Çalışma Bölümleri -->
+            <div class="strategy-section">
+                <h3 class="strategy-title">📚 Hangi Derslere ve Konulara Ağırlık Vermelisin?</h3>
+                <p class="strategy-text">{{ harita.agirlik_verilmesi_gereken_dersler }}</p>
+            </div>
+
+            <div class="strategy-section" style="border-left-color: #10B981;">
+                <h3 class="strategy-title">💡 Bu Yolda Nasıl Çalışmalısın? (Strateji)</h3>
+                <p class="strategy-text">{{ harita.nasil_calisilmali }}</p>
+            </div>
+
+            <div class="strategy-section" style="border-left-color: #F59E0B;">
+                <h3 class="strategy-title">⚠️ Geçen Sene Bu Bölümü Kazananların En Çok Zorlandığı Noktalar</h3>
+                <p class="strategy-text">{{ harita.kazananlarin_zorlandigi_noktalar }}</p>
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="/rol-simulasyonu?alan={{ alan }}" style="background: #4F46E5; color: white; padding: 0.75rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    ← Simülasyona Geri Dön
+                </a>
+                <a href="/ders_programi?alan={{ alan }}" style="background: #059669; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    📅 Haftalık Ders Çalışma Programı Hazırla ➔
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="test-footer">
+        Kariyer ve Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+    </footer>
+
+</body>
+
+</html>

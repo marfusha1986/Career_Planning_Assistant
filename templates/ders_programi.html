@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişiselleştirilmiş Haftalık Ders Çalışma Programı - Kariyer Asistani</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .schedule-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .schedule-card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-left: 5px solid #10B981;
+            border-radius: 0.5rem;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .day-name {
+            color: #1E293B;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .day-focus {
+            background: #EEF2FF;
+            color: #4F46E5;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 1rem;
+        }
+        
+        .day-desc {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="test-body">
+
+    <header class="test-header">
+        <div class="header-content">
+            <span class="badge-pill" style="background: #ECFDF5; color: #059669;">📅 YKS Çalışma Kampı</span>
+            <h1>Kişiselleştirilmiş Haftalık Ders Programı</h1>
+        </div>
+        <a href="/sonuclar?alan={{ alan }}" class="back-link">← Sonuçlara Dön</a>
+    </header>
+
+    <main class="test-container" style="max-width: 60rem;">
+
+        <div class="quiz-card" style="padding: 2.5rem 2rem;">
+
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <span style="color: #64748B; font-size: 0.9rem;">Hedefine Ulaşman İçin Özel Hazırlanan Program:</span>
+                <h2 style="color: #059669; font-size: 1.85rem; margin: 0.25rem 0;">{{ program_adi }}</h2>
+                <p style="color: #334155; font-size: 0.95rem; margin-top: 0.5rem;">
+                    Test sonucun olan <b>{{ alan }}</b> alanındaki hedeflerine odaklanman için tasarlanan haftalık çalışma şablonunu aşağıda bulabilirsin.
+                </p>
+            </div>
+
+            <!-- Günlük Ders Programı Listesi -->
+            <div class="schedule-container">
+                {% for item in gunler %}
+                <div class="schedule-card">
+                    <div class="day-header">
+                        <h3 class="day-name">{{ item.gun }}</h3>
+                        <span class="day-focus">Odak: {{ item.odak }}</span>
+                    </div>
+                    <p class="day-desc">{{ item.detay }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="/yol-haritasi?alan={{ alan }}" style="background: #4F46E5; color: white; padding: 0.75rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    ← Kariyer Yol Haritasına Dön
+                </a>
+                <a href="/bitti?alan={{ alan }}" style="background: #059669; color: white; padding: 0.75rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    🏁 Bitti - Başarılar Dileriz! ➔
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="test-footer">
+        Kariyer ve Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+    </footer>
+
+</body>
+
+</html>

@@ -3,96 +3,266 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>
-        İlgi ve Yetenek Analiz Testi -Kariyer Asistanı
-    </title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>160 Soruluk Kapsamlı Mesleki Eğilim Envanteri - Kariyer Asistani</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .category-section {
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            background: #FFFFFF;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            background: #F8FAFC;
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            color: #1E293B;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .category-header:hover {
+            background: #F1F5F9;
+        }
+        
+        .category-content {
+            padding: 1.25rem;
+            display: none;
+            border-top: 1px solid #E2E8F0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .category-section.active .category-content {
+            display: block;
+        }
+        
+        .question-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: #475569;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="test-body">
-    <!-- HEader -->
-    <header class=" test-header ">
-        <h1 class="header-content ">
-            <span class=" badge-pill"> 🧠 Modül 02 </span> Akıllı İlgi ve Yetenek Testi
-        </h1>
-        <a href=" / " class=" back-link ">← Ana Sayfaya Dön </a>
 
+    <header class="test-header">
+        <div class="header-content">
+            <span class="badge-pill" style="background: #EEF2FF; color: #4F46E5;">🎯 Modül 02</span>
+            <h1>160 Soruluk Kapsamlı Mesleki Eğilim Envanteri</h1>
+        </div>
+        <a href="/" class="back-link">← Ana Sayfa</a>
     </header>
 
-    <!--Main-Content-->
-    <main class="test-container ">
-        <div class=" test-hero">
-            <h2>Kendi Potansiyelini Keşfet</h2>
-            <p>Aşağıdaki durumlara ne kadar katıldığını belirterek sana uygun kariyer ve bölüm eşleşmesini yapmamızı sağlar.</p>
+    <main class="test-container" style="max-width: 52rem;">
+
+        <div class="quiz-card" style="padding: 2.5rem 2rem;">
+            <p style="color: #64748B; margin-bottom: 2rem; text-align: center;">
+                İlgini çeken veya onayladığın maddeleri kategorileri açarak işaretle. İstediğin kadar kategori açıp seçim yapabilirsin.
+            </p>
+
+            <form action="/sonuclar" method="GET">
+
+                <!-- 1. Kategori: Teknik / Sayısal / Mühendislik -->
+                <div class="category-section" id="cat-sayisal">
+                    <div class="category-header" onclick="toggleCategory('cat-sayisal')">
+                        <span>💻 Teknik, Mühendislik ve Sayısal Eğilimler</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="category-content">
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_2"> 1. Bozulan elektronik aletleri tamir etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_20"> 2. Bilgisayarda özel programlar kodlamak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_48"> 3. Laboratuvarda deney yapmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_60"> 4. Bilim teknik dergilerini okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_70"> 5. Keşif ve icatlarla ilgilenmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_80"> 6. Elektronik cihazların aslında nasıl çalıştığını araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_90"> 7. Farklı bir yakıtla çalışacak otomobil yapmaya çalışmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_100"> 8. Astronomi ile ilgili kitaplar okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_110"> 9. Bilim kurgu filmlerini izlemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_130"> 10. Teknolojik yeniliklerle ilgilenmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_150"> 11. Bilimsel formüllerin nasıl geliştirildiğini merak etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sayisal_160"> 12. Kullanılan cihazların özelliklerini geliştirmek ve çoğaltmak</label>
+                    </div>
+                </div>
+
+                <!-- 2. Kategori: Sözel / Dil / Edebiyat -->
+                <div class="category-section" id="cat-sozel">
+                    <div class="category-header" onclick="toggleCategory('cat-sozel')">
+                        <span>📚 Sözel, Dil ve Edebiyat Eğilimleri</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="category-content">
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_5"> 1. Kitap okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_15"> 2. Gazetelerdeki köşe yazılarını okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_17"> 3. Yabancı dilden kitapları kendi dilime çevirmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_25"> 4. Ünlü şairlerden birinin tüm eserlerini okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_37"> 5. Yeni duyduğu yabancı bir kelime için sözlüğe bakmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_57"> 6. Dil öğrenmenin pratik yollarını araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_65"> 7. Televizyondan ya da internetten günlük haberleri takip etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_83"> 8. Münazaralara katılmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_87"> 9. Türkçe dersinde dilbilgisinde başarılı olmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_95"> 10. Söz söyleme ve ikna etme kabiliyetine sahip olmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_97"> 11. Farklı dillerdeki ortak kelimeleri bulmaya çalışmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_105"> 12. Büyük bir yazar veya şair olmayı düşünmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_117"> 13. Düşüncelerini söz ve yazı ile etkin bir şekilde aktarabilmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_143"> 14. Toplum önünde etkili ve güzel konuşmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_148"> 15. Yabancı dildeki eşya isimlerini ezberlemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sozel_155"> 16. Çocuklara masal anlatmak</label>
+                    </div>
+                </div>
+
+                <!-- 3. Kategori: Eşit Ağırlık / Ticaret / Yönetim / Hukuk -->
+                <div class="category-section" id="cat-esit">
+                    <div class="category-header" onclick="toggleCategory('cat-esit')">
+                        <span>📈 Ticaret, Ekonomi, Yönetim ve Sosyal Bilimler</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="category-content">
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_3"> 1. Akıl danışılabilecek bir kişi olmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_9"> 2. 'Milyarder olma sanatı' adlı kitabı okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_19"> 3. Parayı dövize çevirerek saklamak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_23"> 4. Liderlerin hayat hikayelerini okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_29"> 5. Enflasyonun nedenlerini araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_39"> 6. Ekonomi dergilerini okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_43"> 7. Okul tercihi yaparken arkadaşlarına yol göstermek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_49"> 8. Borsa ile ilgilenmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_50"> 9. Bir işletmenin muhasebesini tutmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_53"> 10. Siyasi parti çalışmalarına katılmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_59"> 11. Döviz kurlarını takip etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_63"> 12. Televizyondaki açık oturum programlarını izlemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_73"> 13. Bir başkasına yapılan haksızlığa karşı çıkmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_89"> 14. Zarar eden bir şirketi kara geçirmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_99"> 15. Satın alacağı bir ürünün toptan fiyatını öğrenmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_103"> 16. Bir kurumun personel müdürü olmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_107"> 17. Dış politika yazılarını okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_109"> 18. Kâr/zarar hesaplarıyla ilgilenmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_119"> 19. Serbest piyasa ekonomisine taraftar olmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_133"> 20. Oyunlarda komutan/lider olmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_136"> 21. Meclisin yasama çalışmalarını takip etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="esit_147"> 22. Bir kurumu temsilen görüşmelerde bulunmak</label>
+                    </div>
+                </div>
+
+                <!-- 4. Kategori: Sağlık / Biyoloji / Doğa -->
+                <div class="category-section" id="cat-saglik">
+                    <div class="category-header" onclick="toggleCategory('cat-saglik')">
+                        <span>🩺 Sağlık, Biyoloji ve Doğa Bilimleri Eğilimleri</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="category-content">
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_1"> 1. Tarlanın yanından geçerken ürüne dikkat etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_8"> 2. İnsan vücudunun işleyişini incelemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_11"> 3. Çiftlik hayvanlarına ilgi duymak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_18"> 4. Sağlık kuruluşlarında çalışmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_21"> 5. Sebze-meyve yetiştirmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_28"> 6. Hasta insanlara yardım etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_38"> 7. Alınan ilaçların prospektüsünü okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_41"> 8. Modern çiftlik yöntemleri hakkında yazılar okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_51"> 9. Ormanda tatil yapmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_58"> 10. Ölmek üzere olan bir hastaya suni teneffüs yapmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_68"> 11. Sağlık alanındaki buluşları takip etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_81"> 12. Değişik çiçek cinslerine ilgi duymak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_88"> 13. Bir hastanın ameliyatını izlemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_91"> 14. Yağmurun ne zaman yağacağını tahmin etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_98"> 15. İnsan ve hayvan hücrelerini incelemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_118"> 16. Şifalı suların faydalarını araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_128"> 17. Kanser tedavisini merak etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_138"> 18. Doğa gezilerinde şifalı bitkileri toplamak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="saglik_141"> 19. Hasta ya da yaralı hayvanlara yardımcı olmak</label>
+                    </div>
+                </div>
+
+                <!-- 5. Kategori: Sanat / Tasarım / Mimari -->
+                <div class="category-section" id="cat-sanat">
+                    <div class="category-header" onclick="toggleCategory('cat-sanat')">
+                        <span>🎨 Sanat, Tasarım, Mimari ve Zanaat</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="category-content">
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_4"> 1. Müzeleri gezmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_12"> 2. El sanatları sergilerini gezmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_22"> 3. Evdeki eski mobilyaları onarmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_24"> 4. Antika eşyalara ilgi duymak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_32"> 5. Bir binanın mimari özelliklerini incelemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_34"> 6. Müzikten hoşlanmak ve enstrüman çalabilmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_40"> 7. Yapıların projelerini çizmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_42"> 8. Güzel resim yapmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_54"> 9. Sanat galerisi gezmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_62"> 10. Çocuklara pratik oyuncaklar yapmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_72"> 11. Halı ve kilim mağazalarının vitrinlerine bakmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_74"> 12. Kaliteli fotoğraflar çekmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_92"> 13. Mobilya fuarını gezmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_94"> 14. Müzik aletlerinden birini severek kullanabilmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_112"> 15. Modayı izlemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_114"> 16. Sulu boya ile doğayla ilgili resimler yapmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_122"> 17. Kumaşlardaki desen ve renk uyumuyla ilgilenmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_124"> 18. Çamurdan figürler yapmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_134"> 19. Evin dekorasyonuna ve düzenine önem vermek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_144"> 20. Sinemaya ve tiyatroya gitmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_152"> 121. Dokuma tezgahında çalışmak istemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sanat_154"> 22. Sanat müzelerini gezmek</label>
+                    </div>
+                </div>
+
+                <!-- 6. Kategori: Sosyo-Psikoloji / Araştırma / Hukuk / Yardım -->
+                <div class="category-section" id="cat-sosyal">
+                    <div class="category-header" onclick="toggleCategory('cat-sosyal')">
+                        <span>⚖️ Sosyo-Psikoloji, Araştırma ve Yardımseverlik</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="category-content">
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_6"> 1. Modern yaşamın problemlerini araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_13"> 2. Polisiye filmlerin sonucunu tahmin etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_26"> 3. İnsan davranışlarının nedenini araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_35"> 4. Halkın gelenek ve inançlarını incelemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_36"> 5. Psikolojik sorunların sebeplerini incelemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_46"> 6. Gazetelerdeki sorunlara çözüm yazıları okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_55"> 7. Tarihi olay ve kişileri incelemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_56"> 8. Hayır kurumlarında çalışmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_66"> 9. İnsanları suça iten nedenleri araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_67"> 10. Turistlere rehberlik etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_75"> 11. Olayların neden ve sonuçlarını merak etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_76"> 12. Cezaevindeki tutukluları ziyaret etmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_85"> 13. Toplumların sosyal yapılarını incelemek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_106"> 14. Evrenin niçin yaratıldığını düşünmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_126"> 15. Yeni anayasayı okumak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_137"> 16. Yakın tarihe ait belgeleri çözmek</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_156"> 17. Farklı ırkların ve dillerin oluşumunu araştırmak</label>
+                        <label class="question-item"><input type="checkbox" name="maddeler" value="sosyal_158"> 18. Fakirlere yardım etmeyi sevmek</label>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2.5rem;">
+                    <button type="submit" style="background: #4F46E5; color: white; border: none; padding: 0.85rem 2.5rem; border-radius: 0.5rem; font-weight: 600; font-size: 1rem; cursor: pointer;">
+                        Analizi Tamamla & Sonucu Gör ➔
+                    </button>
+                </div>
+
+            </form>
         </div>
 
-        <!--Test Formu -->
-        <form action=" /test " method=" POST " class=" quiz-form ">
-            <!--Soru 1 -->
-            <h3>1.Karmaşık problemleri çözmek,verileri analiz etmek ve mantık yürütmek beni heyecanlandırıyor.</h3>
-            <div class=" quiz-card ">
-                <div class=" option - grid ">
-                    <label class="option-pill">
-                        <input type="radio" name="q1" value="5" required>
-                        <span>Kesinlikle Katılıyorum</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q1" value="4">
-                        <span>Katılıyorum</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q1" value="3">
-                        <span>Kararsızım</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q1" value="2">
-                        <span>Katılmıyorum</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q1" value="1">
-                        <span>Kesinlikle Katılmıyorum</span>
-                    </label>
-                </div>
-            </div>
-            <!--Soru 2-->
-            <div class=" quiz-card ">
-                <h3>İnsanlarla iletişim kurmak,yeni fikirler anlatmak ve sosyal projelerde yer almak bana enerji verir.</h3>
-                <div class=" option-grid ">
-                    <label class="option-pill">
-                        <input type="radio" name="q2" value="5" required>
-                        <span>Kesinlikle Katılıyorum</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q2" value="4">
-                        <span>Katılıyorum</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q2" value="3">
-                        <span>Kararsızım</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q2" value="2">
-                        <span>Katılmıyorum</span>
-                    </label>
-                    <label class="option-pill">
-                        <input type="radio" name="q2" value="1">
-                        <span>Kesinlikle Katılmıyorum</span>
-                    </label>
-                </div>
-            </div>
-
-            <!--Gönder butonu-->
-            <div class=" submit-wrapper ">
-                <button type=" submit " class=" btn-submit ">Sonuçları analiz et📊</button>
-            </div>
-        </form>
     </main>
 
-    <!--Footer-->
     <footer class="test-footer">
-        Kariyer Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+        Kariyer ve Bölüm Potansiyeli Eşleştirme Sistemi © 2026
     </footer>
+
+    <script>
+        function toggleCategory(categoryId) {
+            const section = document.getElementById(categoryId);
+            section.classList.toggle('active');
+        }
+    </script>
 </body>
 
 </html>

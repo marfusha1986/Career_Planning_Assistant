@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meslek Bazlı Detaylı Matris - Kariyer Asistani</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #CBD5E1;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+        
+        .job-card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+        
+        .job-title {
+            color: #1E293B;
+            font-size: 1.35rem;
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .criterion-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .criterion-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .criterion-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #4F46E5;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .criterion-content {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .highlight-box {
+            background: #EEF2FF;
+            border: 2px solid #4F46E5;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="test-body">
+
+    <header class="test-header">
+        <div class="header-content">
+            <span class="badge-pill" style="background: #EEF2FF; color: #4F46E5;">🎯 Detaylı Meslek Analizi</span>
+            <h1>Sonucunuza Özel Meslek Kıyaslama Matrisi</h1>
+        </div>
+        <a href="/sonuclar?alan={{ alan }}" class="back-link">← Sonuçlara Dön</a>
+    </header>
+
+    <main class="test-container" style="max-width: 60rem;">
+
+        <div class="quiz-card" style="padding: 2.5rem 2rem;">
+
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <span style="color: #64748B; font-size: 0.9rem;">Test Sonucunuza Göre İncelenen Alan:</span>
+                <h2 style="color: #1E293B; font-size: 1.75rem; margin: 0.25rem 0;">{{ alan }}</h2>
+                <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.5rem;">
+                    Bu alandaki en gözde meslekler, ne iş yaptıkları, avantajları ve dezavantajlarıyla aşağıda ayrı ayrı listelenmiştir.
+                </p>
+            </div>
+
+            <!-- Filtreleme Butonları -->
+            <div class="filter-container">
+                <a href="/karsilastirma?alan={{ alan }}&kriter=tumu" class="filter-btn {% if aktif_kriter == 'tumu' %}active{% endif %}">📋 Tüm Detaylar</a>
+                <a href="/karsilastirma?alan={{ alan }}&kriter=avantaj" class="filter-btn {% if aktif_kriter == 'avantaj' %}active{% endif %}">🚀 Avantajlar</a>
+                <a href="/karsilastirma?alan={{ alan }}&kriter=dezavantaj" class="filter-btn {% if aktif_kriter == 'dezavantaj' %}active{% endif %}">⚠️ Dezavantajlar</a>
+                <a href="/karsilastirma?alan={{ alan }}&kriter=zorluk" class="filter-btn {% if aktif_kriter == 'zorluk' %}active{% endif %}">🧗‍♂️ Zorluklar</a>
+                <a href="/karsilastirma?alan={{ alan }}&kriter=calisma_ortami" class="filter-btn {% if aktif_kriter == 'calisma_ortami' %}active{% endif %}">🏢 Çalışma Ortamı</a>
+                <a href="/karsilastirma?alan={{ alan }}&kriter=maas" class="filter-btn {% if aktif_kriter == 'maas' %}active{% endif %}">💰 Maaş & Getiri</a>
+                <a href="/karsilastirma?alan={{ alan }}&kriter=yetenek_uyumu" class="filter-btn {% if aktif_kriter == 'yetenek_uyumu' %}active{% endif %}">🎯 Yetenek Uyumu</a>
+            </div>
+
+            <!-- Meslekleri Ayrı Ayrı Kartlar Halinde Döngüye Sokuyoruz -->
+            {% for meslek in veri.meslekler %}
+            <div class="job-card">
+                <h3 class="job-title"><span>🌟</span>
+                    <a href="/yol-haritasi?meslek={{ meslek.ad }}&alan={{ alan }}" style="color: #1E293B; text-decoration: none;" onmouseover="this.style.color='#4F46E5'" onmouseout="this.style.color='#1E293B'">
+                    {{ meslek.ad }} ➔
+                    </a>
+                </h3>
+
+                {% if aktif_kriter == 'tumu' or aktif_kriter == 'avantaj' %}
+                <div class="criterion-row {% if aktif_kriter == 'avantaj' %}highlight-box{% endif %}">
+                    <span class="criterion-label">🚀 Avantaj</span>
+                    <p class="criterion-content">{{ meslek.avantaj }}</p>
+                </div>
+                {% endif %} {% if aktif_kriter == 'tumu' or aktif_kriter == 'dezavantaj' %}
+                <div class="criterion-row {% if aktif_kriter == 'dezavantaj' %}highlight-box{% endif %}">
+                    <span class="criterion-label">⚠️ Dezavantaj</span>
+                    <p class="criterion-content">{{ meslek.dezavantaj }}</p>
+                </div>
+                {% endif %} {% if aktif_kriter == 'tumu' or aktif_kriter == 'zorluk' %}
+                <div class="criterion-row {% if aktif_kriter == 'zorluk' %}highlight-box{% endif %}">
+                    <span class="criterion-label">🧗‍♂️ Temel Zorluk</span>
+                    <p class="criterion-content">{{ meslek.zorluk }}</p>
+                </div>
+                {% endif %} {% if aktif_kriter == 'tumu' or aktif_kriter == 'calisma_ortami' %}
+                <div class="criterion-row {% if aktif_kriter == 'calisma_ortami' %}highlight-box{% endif %}">
+                    <span class="criterion-label">🏢 Çalışma Ortamı</span>
+                    <p class="criterion-content">{{ meslek.calisma_ortami }}</p>
+                </div>
+                {% endif %} {% if aktif_kriter == 'tumu' or aktif_kriter == 'maas' %}
+                <div class="criterion-row {% if aktif_kriter == 'maas' %}highlight-box{% endif %}">
+                    <span class="criterion-label">💰 Maaş & Getiri Potansiyeli</span>
+                    <p class="criterion-content">{{ meslek.maas }}</p>
+                </div>
+                {% endif %} {% if aktif_kriter == 'tumu' or aktif_kriter == 'yetenek_uyumu' %}
+                <div class="criterion-row {% if aktif_kriter == 'yetenek_uyumu' %}highlight-box{% endif %}">
+                    <span class="criterion-label">🎯 Yetenek Uyumu</span>
+                    <p class="criterion-content">{{ meslek.yetenek_uyumu }}</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <!-- Alt Butonlar -->
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="/rol-simulasyonu?alan={{ alan }}" style="background: #10B981; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    ⏳ Günüm Nasıl Geçer? Simülasyonu ➔
+                </a>
+                <a href="/sonuclar?alan={{ alan }}" style="background: #4F46E5; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    Sonuç Ekranına Dön
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="test-footer">
+        Kariyer ve Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+    </footer>
+
+</body>
+
+</html>

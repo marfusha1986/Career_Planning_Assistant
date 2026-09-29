@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eğitim ve İş Temposu Simülasyonu - Kariyer Asistani</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .sim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .sim-card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+        
+        .sim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 0.75rem;
+        }
+        
+        .sim-icon {
+            font-size: 2rem;
+            background: #EEF2FF;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        
+        .sim-title h3 {
+            color: #1E293B;
+            font-size: 1.15rem;
+            margin: 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        
+        .timeline-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #4F46E5;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .timeline-text {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            background: #FFFFFF;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #E2E8F0;
+        }
+    </style>
+</head>
+
+<body class="test-body">
+
+    <header class="test-header">
+        <div class="header-content">
+            <span class="badge-pill" style="background: #EEF2FF; color: #4F46E5;">⏳ Eğitim & İş Temposu</span>
+            <h1>İlk 10 Meslek: Eğitim ve Çalışma Hayatı Simülasyonu</h1>
+        </div>
+        <a href="/karsilastirma?alan={{ alan }}" class="back-link">← Matrise Dön</a>
+    </header>
+
+    <main class="test-container" style="max-width: 75rem;">
+
+        <div class="quiz-card" style="padding: 2.5rem 2rem;">
+
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <span style="color: #64748B; font-size: 0.9rem;">Test Sonucunuza Göre İncelenen Alan:</span>
+                <h2 style="color: #1E293B; font-size: 1.75rem; margin: 0.25rem 0;">{{ alan }}</h2>
+                <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.5rem;">
+                    Bu alandaki ilk 10 mesleğin seni okulda ne kadar zorlayacağı ve iş hayatında nasıl bir tempoyla çalışacağın aşağıda net bir şekilde özetlenmiştir.
+                </p>
+            </div>
+
+            <!-- 10 Meslek Kartları Grid -->
+            <div class="sim-grid">
+                {% for meslek in simulasyonlar.meslekler %}
+                <div class="sim-card">
+                    <div class="sim-header">
+                        <div class="sim-icon">{{ meslek.ikon if meslek.ikon else '💼' }}</div>
+                        <div class="sim-title">
+                            <!-- Tıklandığında meslek adını ve alanı yol-haritasi sayfasına taşıyor -->
+                            <h3><a href="/yol-haritasi?meslek={{ meslek.ad }}&alan={{ alan }}" style="color: #1E293B; text-decoration: none;" onmouseover="this.style.color='#4F46E5'" onmouseout="this.style.color='#1E293B'">{{ meslek.ad }} ➔</a></h3>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-label">🎓 Eğitim Sürecindeki Zorluklar</span>
+                        <p class="timeline-text">{{ meslek.egitim_zorluklari }}</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-label">⚡ İş Temposu ve Günlük Yaşam</span>
+                        <p class="timeline-text">{{ meslek.is_temposu }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="/karsilastirma?alan={{ alan }}" style="background: #4F46E5; color: white; padding: 0.75rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    ← Matrise Geri Dön
+                </a>
+                <a href="/sonuclar?alan={{ alan }}" style="background: #10B981; color: white; padding: 0.75rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600;">
+                    Sonuç Ekranına Dön
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="test-footer">
+        Kariyer ve Bölüm Potansiyeli Eşleştirme Sistemi © 2026
+    </footer>
+
+</body>
+
+</html>

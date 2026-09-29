@@ -347,3 +347,93 @@
          font-size: 0.8rem;
          color: #94A3B8;
      }
+     /* --- Modül 3: Sonuç Sayfası Stilleri --- */
+     
+     .result-card-container {
+         text-align: center;
+         padding: 2.5rem 2rem;
+     }
+     
+     .result-emoji {
+         font-size: 3.5rem;
+         margin-bottom: 1rem;
+     }
+     
+     .result-title {
+         color: #1E293B;
+         margin-bottom: 0.5rem;
+     }
+     
+     .result-subtitle {
+         color: #64748B;
+         margin-bottom: 2rem;
+     }
+     
+     .result-score-highlight {
+         color: #4F46E5;
+         font-size: 1.2rem;
+         font-weight: 700;
+     }
+     
+     .match-box {
+         background: #F8FAFC;
+         border: 2px solid #E2E8F0;
+         border-radius: 1rem;
+         padding: 2rem;
+         margin-bottom: 2rem;
+         text-align: left;
+     }
+     
+     .match-label {
+         font-size: 0.85rem;
+         font-weight: 700;
+         color: #4F46E5;
+         text-transform: uppercase;
+         letter-spacing: 0.05em;
+     }
+     
+     .match-heading {
+         color: #0F172A;
+         font-size: 1.5rem;
+         margin: 0.5rem 0 1rem 0;
+     }
+     
+     .match-description {
+         color: #475569;
+         line-height: 1.6;
+         margin: 0;
+     }
+     
+     .result-actions {
+         display: flex;
+         gap: 1rem;
+         justify-content: center;
+     }
+     
+     .btn-primary-custom {
+         background: #4F46E5;
+         color: white;
+         padding: 0.75rem 1.5rem;
+         border-radius: 0.5rem;
+         text-decoration: none;
+         font-weight: 600;
+         transition: background 0.2s;
+     }
+     
+     .btn-primary-custom:hover {
+         background: #4338CA;
+     }
+     
+     .btn-secondary-custom {
+         background: #E2E8F0;
+         color: #1E293B;
+         padding: 0.75rem 1.5rem;
+         border-radius: 0.5rem;
+         text-decoration: none;
+         font-weight: 600;
+         transition: background 0.2s;
+     }
+     
+     .btn-secondary-custom:hover {
+         background: #CBD5E1;
+     }
