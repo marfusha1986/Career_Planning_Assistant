@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Potansiyel ve Beceri Eksik Analizi</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skill_gaps.css') }}" />
+</head>
+<body>
+  <header class="test-header">
+    <div class="header-content">
+      <h1>Kariyer &amp; Sınav Planlama Platformu</h1>
+      <span class="badge-pill">Öğrenci ID: {{ ogrenci_id }}</span>
+    </div>
+    <a href="/exam-scores?ogrenci_id={{ ogrenci_id }}" class="back-link">← Deneme Girişi</a>
+  </header>
+
+  <main class="page-wrap">
+    <section class="hero-box">
+      <h2>Potansiyel, Eksik Beceri ve Edinim Yol Haritası</h2>
+      <p>Deneme performansın ile test sonucunun birleşimiyle oluşturulan gelişim çıktısı.</p>
+    </section>
+
+    {% if kayitlar %}
+      {% set son = kayitlar[0] %}
+      {% set skor_degeri = (son[3] or 0) | float %}
+      {% set bar_genisligi = 100 if skor_degeri > 100 else (0 if skor_degeri < 0 else skor_degeri) %}
+
+      <section class="panel-card">
+        <div class="summary-banner">
+          <div class="summary-top">
+            <div>
+              <span class="potansiyel-tag">{{ son[2] }}</span>
+              <span class="alan-etiketi">{{ son[1] }}</span>
+            </div>
+            <div class="skor-kutu">Birleşik Skor: {{ son[3] }} / 100</div>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width: {{ bar_genisligi }}%;"></div>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-box">
+            <div class="kpi-title">Hedef Alan</div>
+            <div class="kpi-val kpi-val-indigo">{{ son[1] }}</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-title">Potansiyel Seviyesi</div>
+            <div class="kpi-val">{{ son[2] }}</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-title">Birleşik Puan</div>
+            <div class="kpi-val">{{ son[3] }} / 100</div>
+          </div>
+        </div>
+
+        <div class="detail-block">
+          <div class="detail-label">Tespit Edilen Eksik / Geliştirilecek Beceri</div>
+          <div class="detail-text">{{ son[4] }}</div>
+        </div>
+
+        <div class="detail-block detail-block-last">
+          <div class="detail-label">Beceri Nasıl Edinilir? (Adım Adım Yol Haritası)</div>
+          <div class="roadmap-grid">
+            {% for adim in son[5].split(';') if adim.strip() %}
+              <div class="roadmap-step">
+                <span class="step-badge">Adım {{ loop.index }}</span>
+                <p class="step-desc">{{ adim.strip() }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-card">
+        <h3 class="panel-card-title">Geçmiş Analiz Kayıtları</h3>
+        {% for k in kayitlar %}
+          <div class="history-item">
+            <div class="history-head">
+              <span>{{ k[1] }} — {{ k[2] }}</span>
+              <span>Skor: {{ k[3] }}</span>
+            </div>
+            <p class="history-eksik"><strong>Eksik:</strong> {{ k[4] }}</p>
+            <p class="history-yol"><strong>Edinim Yolu:</strong> {{ k[5] }}</p>
+          </div>
+        {% endfor %}
+      </section>
+    {% else %}
+      <section class="panel-card panel-card-center">
+        <p class="empty-desc">Henüz birleşik potansiyel ve beceri analizi oluşmamış. Önce deneme sonucunu girip testi tamamlamalısın.</p>
+        <a href="/exam-scores?ogrenci_id={{ ogrenci_id }}" class="btn-nav-primary">Deneme Girişine Git</a>
+      </section>
+    {% endif %}
+
+    <section class="panel-card">
+      <div class="nav-actions">
+        <a href="/ders_programi?ogrenci_id={{ ogrenci_id }}&alan={{ alan }}" class="btn-nav-primary">Ders Programına Geç →</a>
+        <a href="/rol-simulasyonu?ogrenci_id={{ ogrenci_id }}&alan={{ alan }}" class="btn-nav-secondary">Sonraki Adım: Yol / Simülasyon</a>
+        <a href="/test?ogrenci_id={{ ogrenci_id }}" class="btn-nav-secondary">Testi Tekrar Çöz</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="test-footer">
+    Kariyer &amp; Sınav Planlama Platformu • Skill Gaps &amp; Gelişim Raporu
+  </footer>
+</body>
+</html>
